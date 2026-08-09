@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HostAllies
 
-## Getting Started
+Marketing site for HostAllies — back-office financial and revenue management for
+short-term rental property managers. A full rebuild of the previous Wix site.
 
-First, run the development server:
+Built with **Next.js 16 (App Router) + Tailwind CSS v4**, statically generated,
+deployable to Vercel with zero config.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # optional; sensible defaults are baked in
+npm run dev                  # http://localhost:3000
+npm run build && npm start   # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Design system
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Anchored on the logo's exact orange (`#F96D28`), paired with warm-biased neutrals
+and a deep ledger green. The signature element is the **reconciliation statement**
+(`components/ledger/ReconciliationStatement.tsx`) — an owner statement whose debits
+and credits animate into balance. Tokens live in `app/globals.css`; theme is
+system-aware with a manual toggle (`data-theme` on `<html>`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Display type: **Fraunces** · Body: **Inter** · Numerals/labels: **IBM Plex Mono**
+- Fully responsive, keyboard-focus visible, `prefers-reduced-motion` respected, WCAG-AA contrast.
 
-## Learn More
+## Content
 
-To learn more about Next.js, take a look at the following resources:
+| Where | What |
+|---|---|
+| `lib/site.ts` | Company facts, contact details, nav, proof stats |
+| `lib/team.ts` | Leadership bios (Anmol = Financial Accounting Lead) |
+| `content/blog/*.md` | 7 blog posts (front matter + markdown), incl. one `hidden: true` |
+| `lib/blog.ts` | Markdown loader (gray-matter + marked) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Blog front matter: `title, slug, date, author, readTime, excerpt, heroImage, category, relatedVideo?, hidden`.
+Add a post by dropping a new `.md` file in `content/blog/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure & routes
 
-## Deploy on Vercel
+```
+/                                   Home (conversion)
+/about                              Story, mission, team, MYND partnership
+/services/financial-management      8 offerings, capabilities, FAQ, request-a-quote packages
+/services/revenue-management        4 services, how-it-works
+/partnerships                       Tool ecosystem + preferred partners
+/resources                          Blog index (hidden post excluded)
+/resources/[slug]                   Blog post (SSG)
+/contact                            Lead form + details
+/api/contact                        Form handler (POST)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+301 redirects (in `next.config.ts`) preserve old Wix URLs:
+`/about-us`, `/financial-management`, `/revenuemanagement`, `/contact-us`, and `/post/:slug → /resources/:slug`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact form
+
+The form (`components/contact/ContactForm.tsx`) posts to `/api/contact`, which
+validates input and applies honeypot spam protection. **Delivery is intentionally
+un-wired** pending a chosen destination — set `CONTACT_WEBHOOK_URL`, or implement
+Resend/CRM inside `deliver()` in `app/api/contact/route.ts`. Until then submissions
+are logged server-side so nothing is lost.
+
+## SEO
+
+Per-page metadata + OpenGraph, `sitemap.xml`, `robots.txt`, canonical tags, and
+JSON-LD (`Organization` + `ProfessionalService`, `BlogPosting`, `BreadcrumbList`).
+Google site-verification is set in `app/layout.tsx`. Set `NEXT_PUBLIC_SITE_URL`
+in production so absolute URLs are correct.
+
+## Open items (for HostAllies)
+
+- Contact-form destination (email vs CRM) + optional scheduling embed (slot ready on `/contact`).
+- Real headshots for Robin Anderson & Anmol Singh (monogram fallback in place).
+- Real packages/pricing (currently a request-a-quote block).
+- Testimonials / client logos (design slots ready, none fabricated).
+- Confirm the "1,800+ / 12M+ / $7B+" wording (MYND delivery network).
