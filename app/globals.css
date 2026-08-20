@@ -1,315 +1,365 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* ============================================================
-   HostAllies — "financial stationery" design system
-   Ledger-white field · deep green as a real surface · orange as accent only.
-   Display: Archivo (grotesque) · Body: Inter · Numerals: IBM Plex Mono
+   HostAllies — tokens wired via tailwind.config.ts → src/styles/tokens.ts
+   Lexend headings · Roboto body · borders over shadows
    ============================================================ */
 
-:root {
-  --field: #f4f7f4;
-  --surface: #ffffff;
-  --surface-2: #ebf0ec;
-  --ink: #16211c;
-  --ink-soft: #586460;
-  --ink-faint: #8b948f;
-  --brand: #f96d28;
-  --brand-tint: #fbece1;
-  --ember: #bd5019;
-  --green: #103d30;
-  --green-deep: #0c2c23;
-  --green-soft: #e6efe9;
-  --ledger: #1f6b4f;
-  --ledger-soft: #e6efe9;
-  --amber: #9a6b12;
-  --rule: #e0e7e1;
-  --rule-strong: #c9d2cb;
-  --on-green: #ecf2ed;
-  --on-green-soft: #a7bcb0;
-  --on-green-rule: rgba(236, 242, 237, 0.16);
-  --shadow-sm: 0 1px 2px rgba(16, 33, 28, 0.05);
-  --shadow-md: 0 1px 2px rgba(16, 33, 28, 0.05), 0 14px 34px -16px rgba(16, 33, 28, 0.18);
-  --shadow-lg: 0 2px 4px rgba(16, 33, 28, 0.06), 0 30px 64px -26px rgba(16, 33, 28, 0.28);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --field: #0e1512;
-    --surface: #14201b;
-    --surface-2: #18241e;
-    --ink: #e9f0eb;
-    --ink-soft: #a2b0a8;
-    --ink-faint: #74827a;
-    --brand: #ff7e3c;
-    --brand-tint: #2a1a10;
-    --ember: #ff9457;
-    --green: #16332a;
-    --green-deep: #102a22;
-    --green-soft: #16332a;
-    --ledger: #4fbf93;
-    --ledger-soft: #16332a;
-    --amber: #e0a83c;
-    --rule: #2a362f;
-    --rule-strong: #384539;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -18px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 30px 70px -28px rgba(0, 0, 0, 0.75);
-  }
-}
-
-:root[data-theme="light"] {
-  --field: #f4f7f4;
-  --surface: #ffffff;
-  --surface-2: #ebf0ec;
-  --ink: #16211c;
-  --ink-soft: #586460;
-  --ink-faint: #8b948f;
-  --brand: #f96d28;
-  --brand-tint: #fbece1;
-  --ember: #bd5019;
-  --green: #103d30;
-  --green-deep: #0c2c23;
-  --green-soft: #e6efe9;
-  --ledger: #1f6b4f;
-  --ledger-soft: #e6efe9;
-  --amber: #9a6b12;
-  --rule: #e0e7e1;
-  --rule-strong: #c9d2cb;
-  --shadow-sm: 0 1px 2px rgba(16, 33, 28, 0.05);
-  --shadow-md: 0 1px 2px rgba(16, 33, 28, 0.05), 0 14px 34px -16px rgba(16, 33, 28, 0.18);
-  --shadow-lg: 0 2px 4px rgba(16, 33, 28, 0.06), 0 30px 64px -26px rgba(16, 33, 28, 0.28);
-}
-
-:root[data-theme="dark"] {
-  --field: #0e1512;
-  --surface: #14201b;
-  --surface-2: #18241e;
-  --ink: #e9f0eb;
-  --ink-soft: #a2b0a8;
-  --ink-faint: #74827a;
-  --brand: #ff7e3c;
-  --brand-tint: #2a1a10;
-  --ember: #ff9457;
-  --green: #16332a;
-  --green-deep: #102a22;
-  --green-soft: #16332a;
-  --ledger: #4fbf93;
-  --ledger-soft: #16332a;
-  --amber: #e0a83c;
-  --rule: #2a362f;
-  --rule-strong: #384539;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -18px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 30px 70px -28px rgba(0, 0, 0, 0.75);
-}
-
 @theme inline {
-  --color-field: var(--field);
-  --color-paper: var(--field);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-ink-faint: var(--ink-faint);
-  --color-brand: var(--brand);
-  --color-brand-tint: var(--brand-tint);
-  --color-ember: var(--ember);
-  --color-green: var(--green);
-  --color-green-deep: var(--green-deep);
-  --color-green-soft: var(--green-soft);
-  --color-ledger: var(--ledger);
-  --color-ledger-soft: var(--ledger-soft);
-  --color-amber: var(--amber);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-on-green: var(--on-green);
-  --color-on-green-soft: var(--on-green-soft);
+  --font-heading: var(--font-lexend), Inter, Arial, sans-serif;
+  --font-body: var(--font-roboto), Inter, Arial, sans-serif;
 
-  --font-display: var(--font-archivo), system-ui, sans-serif;
-  --font-serif: var(--font-archivo), system-ui, sans-serif;
-  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
-
-  --shadow-sm: var(--shadow-sm);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
+  /* Brand palette — kebab-case names required for utilities (bg-pine-dark, etc.) */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-orange: #f96d28;
+  --color-orange-dark: #a04715;
+  --color-sand: #ede4cc;
+  --color-sand-light: #f9f2e4;
+  --color-moss: #91aa94;
+  --color-moss-dark: #607364;
+  --color-pine: #475451;
+  --color-pine-dark: #1f2a28;
+  /* Hairline shared by AccentPanel, panel-elevated, card-elevated */
+  --border-width: 1px;
 }
 
 /* ============================================================ Base */
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
-  background: var(--field);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  line-height: 1.6;
+  background-color: theme(colors.white);
+  color: theme(colors.pineDark);
+  font-family: theme(fontFamily.body);
+  font-size: theme(fontSize.body[0]);
+  line-height: theme(--text-body--line-height, 1.625);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
+h1,
+h2,
+h3,
+h4 {
+  font-family: theme(fontFamily.heading);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
   text-wrap: balance;
   margin: 0;
 }
 
-::selection {
-  background: var(--brand);
-  color: #fff;
+h1 {
+  font-size: theme(fontSize.h1[0]);
+  line-height: 1.17;
 }
 
-a { color: inherit; }
+@media (min-width: 1024px) {
+  h1 {
+    font-size: theme(fontSize.h1-lg[0]);
+    line-height: 1.125;
+  }
+}
+
+h2 {
+  font-size: theme(fontSize.h2[0]);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  h2 {
+    font-size: theme(fontSize.h2-lg[0]);
+    line-height: 1.22;
+  }
+}
+
+h3 {
+  font-size: theme(fontSize.h3[0]);
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  h3 {
+    font-size: theme(fontSize.h3-lg[0]);
+    line-height: 1.29;
+  }
+}
+
+::selection {
+  background-color: theme(colors.orange);
+  color: theme(colors.black);
+}
+
+@layer base {
+  a {
+    color: inherit;
+  }
+}
 
 :focus-visible {
-  outline: 2px solid var(--brand);
+  outline: 2px solid theme(colors.orangeDark);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: theme(borderRadius.control);
 }
 
-.tnum { font-variant-numeric: tabular-nums; }
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
 
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
   z-index: 100;
-  background: var(--ink);
-  color: var(--field);
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 14px;
+  background-color: theme(colors.pineDark);
+  color: theme(colors.white);
+  padding: theme(spacing.2) theme(spacing.4);
+  border-radius: theme(borderRadius.control);
+  font-size: theme(fontSize.sm[0]);
 }
-.skip-link:focus { left: 16px; top: 16px; }
 
-/* ============================================================ Primitives */
+.skip-link:focus {
+  left: theme(spacing.4);
+  top: theme(spacing.4);
+}
+
+/* ============================================================ Layout */
 
 .container {
   width: 100%;
-  max-width: 1180px;
+  max-width: theme(maxWidth.content);
   margin-inline: auto;
-  padding-inline: 22px;
-}
-@media (min-width: 768px) {
-  .container { padding-inline: 40px; }
+  padding-inline: theme(spacing.4);
 }
 
-/* Ledger label — a plain, ruled-off mono kicker (no floating orange dash) */
+.card-elevated {
+  border: var(--border-width) solid theme(colors.moss);
+  border-radius: theme(borderRadius.card);
+  background-color: theme(colors.white);
+  box-shadow: 0 1px 0 rgb(31 42 40 / 0.04);
+}
+
+.panel-elevated {
+  border: var(--border-width) solid theme(colors.moss);
+  border-radius: theme(borderRadius.panel);
+  background-color: theme(colors.white);
+  box-shadow: 0 1px 0 rgb(31 42 40 / 0.04);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: theme(spacing.8);
+  }
+}
+
+/* ============================================================ Primitives */
+
 .eyebrow {
   display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: theme(fontFamily.body);
+  font-size: theme(fontSize.label[0]);
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ember);
+  color: theme(colors.orangeDark);
+}
+
+/** Brand essence — Lexend italic accent (textAccent token). See docs/brand/brand-system.md */
+.brand-ally {
+  font-family: theme(fontFamily.heading);
+  font-style: italic;
+  font-weight: 600;
+  color: theme(colors.orangeDark);
+  text-decoration: underline;
+  text-decoration-color: theme(colors.orangeDark);
+  text-underline-offset: 0.12em;
+  text-decoration-thickness: 2px;
 }
 
 .ledger-rule {
   border: 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid theme(colors.sand);
   margin: 0;
 }
 
-/* Fine ruled-paper backdrop, faded */
 .ruled {
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,
     transparent 39px,
-    var(--rule) 39px,
-    var(--rule) 40px
+    theme(colors.sand) 39px,
+    theme(colors.sand) 40px
   );
 }
 
 .link {
-  color: var(--ember);
+  color: theme(colors.orangeDark);
   text-decoration: none;
-  background-image: linear-gradient(var(--brand), var(--brand));
-  background-size: 0% 1.5px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 0.25s ease;
-  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
-.link:hover { background-size: 100% 1.5px; }
+
+.link:hover {
+  border-bottom-color: theme(colors.orangeDark);
+}
+
+.text-display {
+  font-family: theme(fontFamily.heading);
+  font-size: theme(fontSize.display[0]);
+  line-height: 1.14;
+  font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+  .text-display {
+    font-size: theme(fontSize.display-lg[0]);
+    line-height: 1.06;
+  }
+}
+
+.text-body {
+  font-size: theme(fontSize.body[0]);
+  line-height: 1.625;
+  max-width: theme(maxWidth.prose);
+}
+
+.text-label {
+  font-family: theme(fontFamily.body);
+  font-size: theme(fontSize.label[0]);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
 
 /* ============================================================ Article / prose */
 
 .article {
-  font-size: 18px;
-  line-height: 1.75;
-  color: var(--ink);
+  font-size: theme(fontSize.body[0]);
+  line-height: 1.625;
+  color: theme(colors.pineDark);
 }
-.article > * + * { margin-top: 1.25em; }
+
+.article > * + * {
+  margin-top: 1.25em;
+}
+
 .article h2 {
-  font-size: 1.5em;
+  font-size: theme(fontSize.h2-lg[0]);
   margin-top: 2em;
-  line-height: 1.15;
 }
-.article h3 { font-size: 1.2em; margin-top: 1.6em; }
-.article p { max-width: 68ch; }
+
+.article h3 {
+  font-size: theme(fontSize.h3-lg[0]);
+  margin-top: 1.6em;
+}
+
+.article p {
+  max-width: theme(maxWidth.prose);
+}
+
 .article a {
-  color: var(--ember);
+  color: theme(colors.orangeDark);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
 }
-.article a:hover { color: var(--brand); }
-.article strong { font-weight: 650; color: var(--ink); }
-.article ul, .article ol { padding-left: 1.3em; max-width: 66ch; }
-.article li + li { margin-top: 0.4em; }
-.article ul li::marker { color: var(--brand); }
+
+.article a:hover {
+  color: theme(colors.pineDark);
+}
+
+.article strong {
+  font-weight: 500;
+  color: theme(colors.pineDark);
+}
+
+.article ul,
+.article ol {
+  padding-left: 1.3em;
+  max-width: theme(maxWidth.prose);
+}
+
+.article li + li {
+  margin-top: 0.4em;
+}
+
 .article blockquote {
   margin: 1.6em 0;
-  padding: 6px 0 6px 24px;
-  border-left: 2px solid var(--brand);
-  font-family: var(--font-display);
-  font-size: 1.28em;
-  font-weight: 500;
-  line-height: 1.28;
-  letter-spacing: -0.01em;
-  color: var(--ink);
+  padding: theme(spacing.1) 0 theme(spacing.1) theme(spacing.6);
+  border-left: 2px solid theme(colors.orangeDark);
+  font-family: theme(fontFamily.heading);
+  font-size: theme(fontSize.h3[0]);
+  font-weight: 600;
+  line-height: 1.25;
+  color: theme(colors.pineDark);
 }
-.article blockquote p { margin: 0; max-width: none; }
+
+.article blockquote p {
+  margin: 0;
+  max-width: none;
+}
+
 .article img {
-  border-radius: 10px;
-  border: 1px solid var(--rule);
+  border-radius: theme(borderRadius.card);
+  border: 1px solid theme(colors.sand);
   width: 100%;
   height: auto;
 }
-.article hr { border: 0; border-top: 1px solid var(--rule); margin: 2.4em 0; }
+
+.article hr {
+  border: 0;
+  border-top: 1px solid theme(colors.sand);
+  margin: 2.4em 0;
+}
+
 .article code {
-  font-family: var(--font-mono);
+  font-family: theme(fontFamily.body);
   font-size: 0.88em;
-  background: var(--surface-2);
+  background-color: theme(colors.sand);
   padding: 0.15em 0.4em;
-  border-radius: 4px;
+  border-radius: theme(borderRadius.control);
 }
 
 /* ============================================================ Motion */
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.rise { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; }
-  *, *::before, *::after {
+  .rise {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

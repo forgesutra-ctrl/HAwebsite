@@ -1,19 +1,26 @@
 /**
- * Central site configuration: company facts, contact details, navigation.
- * Single source of truth for anything that appears in more than one place.
+ * Central site configuration: company facts, contact details, footer navigation.
+ * Header navigation lives in lib/navigation.ts.
  */
+
+import {
+  servicesNav,
+  solutionsNav,
+  processNav,
+  resourcesNav,
+  primaryCta,
+} from "./navigation";
+
+import { getSiteUrl } from "./seo";
 
 export const site = {
   name: "HostAllies",
   legalName: "HostAllies",
-  tagline: "Your Ally in Vacation Rental Success",
-  positioning: "Built by Property Managers, for Property Managers",
+  tagline: "Reliable numbers. Clear control. An accountable financial Ally.",
+  positioning: "Trust accounting and financial management for STR property managers",
   description:
-    "Back-office financial and revenue management for short-term rental property managers — trust accounting, owner statements, reconciliation, and tax, handled by an ally who speaks your language.",
-  // Update NEXT_PUBLIC_SITE_URL in production. Falls back to the live domain.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://www.hostallies.com",
+    "STR property managers: trust accounting, bookkeeping, owner statements, and reporting — reliable numbers and an accountable financial Ally.",
+  url: getSiteUrl(),
   email: "hello@hostallies.com",
   phone: "404-735-1666",
   phoneHref: "+14047351666",
@@ -26,33 +33,19 @@ export const site = {
     country: "US",
   },
   googleSiteVerification: "Xe6iAoSGPphwB8gp5E73OU-vCVRQKM_135e_GCyQfO8",
-  // The proof stats used site-wide (MYND delivery network).
-  stats: [
-    { value: "1,800+", label: "Skilled professionals" },
-    { value: "12M+", label: "Transactions processed / yr" },
-    { value: "$7B+", label: "In financial throughput" },
-  ],
+  consultationCta: primaryCta,
 } as const;
 
-export const mainNav = [
-  { label: "About", href: "/about" },
-  { label: "Financial Management", href: "/services/financial-management" },
-  { label: "Revenue Management", href: "/services/revenue-management" },
-  { label: "Partnerships", href: "/partnerships" },
-  { label: "Resources", href: "/resources" },
-] as const;
-
 export const footerNav = {
-  Services: [
-    { label: "Financial Management", href: "/services/financial-management" },
-    { label: "Revenue Management", href: "/services/revenue-management" },
-    { label: "Partnerships", href: "/partnerships" },
-  ],
+  Services: servicesNav.items.map(({ label, href }) => ({ label, href })),
+  Solutions: solutionsNav.items.map(({ label, href }) => ({ label, href })),
   Company: [
-    { label: "About", href: "/about" },
-    { label: "Resources", href: "/resources" },
+    ...processNav.items.map(({ label, href }) => ({ label, href })),
+    { label: "Pricing", href: "/pricing" },
+    { label: "Trustkeeping", href: "/trustkeeping" },
     { label: "Contact", href: "/contact" },
   ],
+  Resources: resourcesNav.items.map(({ label, href }) => ({ label, href })),
 } as const;
 
 export const fullAddress = `${site.address.street}, ${site.address.city} ${site.address.region} ${site.address.postalCode}`;

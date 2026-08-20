@@ -5,6 +5,8 @@ import { marked } from "marked";
 
 export type PostMeta = {
   title: string;
+  /** Search-intent phrase for "{seoTitle} | HostAllies" — required for SEO limits. */
+  seoTitle: string;
   slug: string;
   date: string;
   author: string;
@@ -37,6 +39,7 @@ function normalizeDate(raw: unknown): string {
 function toMeta(data: Record<string, unknown>, slug: string): PostMeta {
   return {
     title: String(data.title ?? ""),
+    seoTitle: String(data.seoTitle ?? data.title ?? ""),
     slug: String(data.slug ?? slug),
     date: normalizeDate(data.date),
     author: String(data.author ?? "Team HostAllies"),

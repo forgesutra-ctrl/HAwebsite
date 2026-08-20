@@ -1,36 +1,35 @@
-import { site } from "@/lib/site";
+import {
+  resolveStatDisplays,
+  type RegisteredClaimId,
+} from "@/src/content/claims-register";
 
-/**
- * Proof stats as a statement excerpt: left-aligned, ruled, tabular numerals,
- * on the deep green surface. Orange is reserved for the values.
- */
-export function StatBand({ note = true }: { note?: boolean }) {
+type StatBandProps = {
+  claimIds: readonly RegisteredClaimId[];
+  note?: string;
+};
+
+export function StatBand({ claimIds, note }: StatBandProps) {
+  const stats = resolveStatDisplays(claimIds);
+  if (stats.length === 0) return null;
+
   return (
-    <div className="overflow-hidden rounded-lg bg-green text-[color:var(--on-green)]">
+    <div className="overflow-hidden rounded-card bg-pine-dark text-white">
       <div className="px-6 py-7 sm:px-9 sm:py-9">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--on-green-soft)]">
-          Delivery network · summary
-        </p>
+        <p className="text-label text-sand-light">Verified metrics</p>
         <dl className="mt-4">
-          {site.stats.map((s) => (
+          {stats.map((s) => (
             <div
-              key={s.label}
-              className="flex items-baseline justify-between gap-6 border-t border-[color:var(--on-green-rule)] py-4 first:border-t-0"
+              key={s.claimId}
+              className="flex items-baseline justify-between gap-6 border-t border-pine py-4 first:border-t-0"
             >
-              <dt className="text-[15px] text-[color:var(--on-green)] sm:text-base">
-                {s.label}
-              </dt>
-              <dd className="tnum font-mono text-2xl font-medium text-brand sm:text-[1.7rem]">
+              <dt className="text-body text-white sm:text-base">{s.label}</dt>
+              <dd className="tnum text-h3-lg font-medium text-sand-light">
                 {s.value}
               </dd>
             </div>
           ))}
         </dl>
-        {note && (
-          <p className="mt-4 text-xs text-[color:var(--on-green-soft)]">
-            Delivered through our global network with MYND Integrated Solutions.
-          </p>
-        )}
+        {note && <p className="mt-4 text-sm text-sand-light">{note}</p>}
       </div>
     </div>
   );

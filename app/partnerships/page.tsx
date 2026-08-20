@@ -4,19 +4,9 @@ import { Section, SectionHeading, Eyebrow } from "@/components/ui/Section";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { ButtonLink } from "@/components/ui/Button";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { staticPageSeo } from "@/lib/seo/pages";
 
-export const metadata: Metadata = {
-  title: "Partnerships — The STR Tool Ecosystem",
-  description:
-    "HostAllies works inside the STR industry's leading tools and partners with QuickBooks, Clearing, Guesty, Ramp, Hostfully, and Track to help property managers grow through Tech + Talent.",
-  alternates: { canonical: "/partnerships" },
-  openGraph: {
-    title: "Partnerships — The STR Tool Ecosystem | HostAllies",
-    description:
-      "We work inside your favorite STR tools and partner with the best in the ecosystem.",
-    url: "/partnerships",
-  },
-};
+export const metadata: Metadata = staticPageSeo.partnerships;
 
 const ecosystem = [
   {
@@ -100,14 +90,12 @@ export default function PartnershipsPage() {
       />
 
       {/* Hero */}
-      <section className="border-b border-rule">
+      <section className="border-b border-moss bg-white">
         <div className="container py-16 sm:py-24">
-          <div className="max-w-3xl">
+          <div className="max-w-prose">
             <Eyebrow>Partnerships</Eyebrow>
-            <h1 className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
-              Powerful tech. Trusted Allies.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink-soft sm:text-xl">
+            <h1 className="mt-6">Powerful tech. Trusted Allies.</h1>
+            <p className="mt-6 text-body text-pine lg:text-h3">
               We have deep experience working with all your favorite tools across
               the STR landscape — and we keep growing our partnership ecosystem to
               serve you better.
@@ -126,17 +114,17 @@ export default function PartnershipsPage() {
           {ecosystem.map((cat) => (
             <div
               key={cat.title}
-              className="rounded-2xl border border-rule bg-surface p-7"
+              className="rounded-card border border-moss bg-white p-7"
             >
-              <h3 className="text-xl">{cat.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
+              <h3 className="text-h3">{cat.title}</h3>
+              <p className="mt-2 text-body text-pine">
                 {cat.intro}
               </p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {cat.tools.map((t) => (
                   <li
                     key={t}
-                    className="rounded-full border border-rule bg-surface-2 px-3 py-1.5 font-mono text-xs text-ink"
+                    className="rounded-control border border-moss bg-white px-3 py-1.5 text-label text-pine-dark"
                   >
                     {t}
                   </li>
@@ -148,7 +136,7 @@ export default function PartnershipsPage() {
       </Section>
 
       {/* Preferred partners */}
-      <Section tone="surface" divider>
+      <Section divider>
         <SectionHeading
           eyebrow="Preferred partners"
           title="Partners with awesome benefits."
@@ -158,7 +146,7 @@ export default function PartnershipsPage() {
           {preferred.map((p) => (
             <div
               key={p.name}
-              className="flex flex-col rounded-2xl border border-rule bg-surface p-7"
+              className="flex flex-col rounded-card border border-moss bg-white p-7"
             >
               <div className="relative h-8 w-32">
                 <Image
@@ -169,12 +157,12 @@ export default function PartnershipsPage() {
                   className="object-contain object-left"
                 />
               </div>
-              <p className="mt-5 flex-1 text-[15px] leading-relaxed text-ink-soft">
+              <p className="mt-5 flex-1 text-body text-pine">
                 <a
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-ink hover:text-ember"
+                  className="font-medium text-pine-dark hover:text-orange-dark"
                 >
                   {p.name}
                 </a>{" "}
@@ -182,7 +170,7 @@ export default function PartnershipsPage() {
               </p>
               <a
                 href="/contact"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-ember hover:gap-2.5"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-orange-dark hover:gap-2.5"
               >
                 Learn about special offers
                 <span aria-hidden="true">→</span>
@@ -207,10 +195,12 @@ export default function PartnershipsPage() {
             ].map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 rounded-2xl border border-rule bg-surface p-5"
+                className="flex items-start gap-3 rounded-card border border-moss bg-white p-5"
               >
-                <span className="mt-0.5 text-ledger">✓</span>
-                <span className="text-[15px] text-ink">{item}</span>
+                <span className="mt-0.5 text-moss-dark" aria-hidden="true">
+                  ✓
+                </span>
+                <span className="text-body text-pine-dark">{item}</span>
               </li>
             ))}
           </ul>

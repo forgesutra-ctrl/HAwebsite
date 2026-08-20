@@ -1,0 +1,45 @@
+{
+  "color": {
+    "white": "#FFFFFF",
+    "black": "#000000",
+    "orange": "#F96D28",
+    "orangeDark": "#A04715",
+    "sand": "#EDE4CC",
+    "sandLight": "#F9F2E4",
+    "moss": "#91AA94",
+    "mossDark": "#607364",
+    "pine": "#475451",
+    "pineDark": "#1F2A28"
+  },
+  "semantic": {
+    "page": "#FFFFFF",
+    "surface": "#FFFFFF",
+    "surfaceMuted": "#EDE4CC",
+    "textPrimary": "#1F2A28",
+    "textSecondary": "#475451",
+    "textMuted": "#607364",
+    "textAccent": "#A04715",
+    "ctaFill": "#F96D28",
+    "ctaText": "#000000",
+    "onPine": "#FFFFFF",
+    "onPineMuted": "#F9F2E4",
+    "onMoss": "#1F2A28",
+    "border": "#EDE4CC",
+    "borderStrong": "#91AA94"
+  },
+  "section": {
+    "dominantBackground": "#FFFFFF",
+    "anchorBackground": "#1F2A28",
+    "accentPanelBackground": "#EDE4CC",
+    "minAdjacentLuminanceDelta": 0.15
+  },
+  "brandAllyAccent": {
+    "cssClass": "brand-ally",
+    "fontFamily": "Lexend",
+    "fontStyle": "italic",
+    "fontWeight": 600,
+    "color": "#A04715",
+    "minContrastRatioLargeText": 3,
+    "background": "#FFFFFF"
+  }
+}

@@ -1,4 +1,5 @@
 import { site, fullAddress } from "@/lib/site";
+import { absoluteUrl } from "@/lib/seo";
 
 function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -9,20 +10,21 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
+/** Organization schema — home page only. Matches visible company facts in footer. */
 export function OrganizationJsonLd() {
   return (
     <JsonLd
       data={{
         "@context": "https://schema.org",
-        "@type": ["Organization", "ProfessionalService"],
+        "@type": "Organization",
         name: site.name,
+        legalName: site.legalName,
         url: site.url,
         email: site.email,
         telephone: site.phone,
         description: site.description,
-        logo: `${site.url}/brand/hostallies-logo-orange.png`,
-        image: `${site.url}/brand/hostallies-logo-orange.png`,
-        areaServed: "US",
+        logo: absoluteUrl("/brand/hostallies-logo-orange.png"),
+        image: absoluteUrl("/brand/hostallies-logo-orange.png"),
         address: {
           "@type": "PostalAddress",
           streetAddress: site.address.street,
@@ -37,7 +39,8 @@ export function OrganizationJsonLd() {
   );
 }
 
-export function BlogPostingJsonLd({
+/** Article schema for blog posts — matches visible headline, excerpt, and dates. */
+export function ArticleJsonLd({
   title,
   description,
   slug,
@@ -50,27 +53,67 @@ export function BlogPostingJsonLd({
   date: string;
   image?: string;
 }) {
+  const url = absoluteUrl(`/resources/${slug}`);
   return (
     <JsonLd
       data={{
         "@context": "https://schema.org",
-        "@type": "BlogPosting",
+        "@type": "Article",
         headline: title,
         description,
         datePublished: date,
         dateModified: date,
-        url: `${site.url}/resources/${slug}`,
-        image: image ? `${site.url}${image}` : undefined,
-        author: { "@type": "Organization", name: "Team HostAllies" },
+        url,
+        mainEntityOfPage: url,
+        image: image ? absoluteUrl(image) : absoluteUrl("/brand/hostallies-logo-orange.png"),
+        author: { "@type": "Organization", name: site.name, url: site.url },
         publisher: {
           "@type": "Organization",
           name: site.name,
           logo: {
             "@type": "ImageObject",
-            url: `${site.url}/brand/hostallies-logo-orange.png`,
+            url: absoluteUrl("/brand/hostallies-logo-orange.png"),
           },
         },
-        mainEntityOfPage: `${site.url}/resources/${slug}`,
+      }}
+    />
+  );
+}
+
+/** @deprecated Use ArticleJsonLd */
+export const BlogPostingJsonLd = ArticleJsonLd;
+
+/** Service + AccountingService — matches visible service page hero and description. */
+export function ServiceJsonLd({
+  name,
+  description,
+  slug,
+  serviceType,
+}: {
+  name: string;
+  description: string;
+  slug: string;
+  serviceType: string;
+}) {
+  const url = absoluteUrl(`/services/${slug}`);
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": ["Service", "AccountingService"],
+        name,
+        description,
+        url,
+        serviceType,
+        provider: {
+          "@type": "Organization",
+          name: site.name,
+          url: site.url,
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "United States",
+        },
       }}
     />
   );
@@ -90,7 +133,7 @@ export function BreadcrumbJsonLd({
           "@type": "ListItem",
           position: i + 1,
           name: it.name,
-          item: `${site.url}${it.url}`,
+          item: absoluteUrl(it.url),
         })),
       }}
     />

@@ -42,7 +42,7 @@ Add a post by dropping a new `.md` file in `content/blog/`.
 
 ```
 /                                   Home (conversion)
-/about                              Story, mission, team, MYND partnership
+/about                              Story, mission, team
 /services/financial-management      8 offerings, capabilities, FAQ, request-a-quote packages
 /services/revenue-management        4 services, how-it-works
 /partnerships                       Tool ecosystem + preferred partners
@@ -76,4 +76,4 @@ in production so absolute URLs are correct.
 - Real headshots for Robin Anderson & Anmol Singh (monogram fallback in place).
 - Real packages/pricing (currently a request-a-quote block).
 - Testimonials / client logos (design slots ready, none fabricated).
-- Confirm the "1,800+ / 12M+ / $7B+" wording (MYND delivery network).
+- Publishable statistics must be registered in `src/content/claims-register.ts` before use in stat UI.

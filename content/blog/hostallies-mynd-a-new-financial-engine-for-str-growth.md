@@ -1,13 +1,14 @@
 ---
 title: "HostAllies & MYND: A New Financial Engine for STR Growth"
+seoTitle: "HostAllies & MYND STR Partnership"
 slug: hostallies-mynd-a-new-financial-engine-for-str-growth
 date: 2026-02-03
 author: Team HostAllies
 readTime: "2 min"
-excerpt: "HostAllies and MYND launch a co-investment partnership offering STR operators audit-ready trust accounting, fractional CFO strategy, and tax compliance to scale faster."
+excerpt: "STR operators: HostAllies and MYND partner on audit-ready trust accounting, fractional CFO strategy, and tax compliance to scale faster."
 heroImage: ""
 category: "Partnership"
-hidden: false
+hidden: true
 ---
 
 Operators didn't become short-term rental (STR) property managers because they wanted to be accountants. Yet, as portfolios grow, a frustrating reality sets in: leadership teams find themselves engrossed in a never-ending cycle of trust account reconciliations, complex OTA payouts, and high-pressure owner reporting.

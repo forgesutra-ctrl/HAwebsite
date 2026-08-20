@@ -6,12 +6,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-rule bg-surface-2">
+    <footer className="border-t border-pine-dark bg-pine-dark text-sand-light">
       <div className="container py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           <div className="max-w-xs">
             <Logo />
-            <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            <p className="mt-4 text-sm leading-relaxed text-sand-light">
               Simplify your operations and maximize your profitability with
               professional back-office support built for property managers.
             </p>
@@ -19,15 +19,13 @@ export function Footer() {
 
           {Object.entries(footerNav).map(([heading, links]) => (
             <div key={heading}>
-              <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-ink-faint">
-                {heading}
-              </h3>
+              <p className="text-label text-sand-light">{heading}</p>
               <ul className="mt-4 flex flex-col gap-2.5">
                 {links.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="text-sm text-ink-soft transition-colors hover:text-ember"
+                      className="text-sm text-sand-light transition-colors hover:text-white"
                     >
                       {l.label}
                     </Link>
@@ -38,14 +36,12 @@ export function Footer() {
           ))}
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-ink-faint">
-              Contact
-            </h3>
-            <ul className="mt-4 flex flex-col gap-2.5 text-sm text-ink-soft">
+            <p className="text-label text-sand-light">Contact</p>
+            <ul className="mt-4 flex flex-col gap-2.5 text-sm text-sand-light">
               <li>
                 <a
                   href={`tel:${site.phoneHref}`}
-                  className="transition-colors hover:text-ember"
+                  className="transition-colors hover:text-white"
                 >
                   {site.phone}
                 </a>
@@ -53,7 +49,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="transition-colors hover:text-ember"
+                  className="transition-colors hover:text-white"
                 >
                   {site.email}
                 </a>
@@ -64,7 +60,7 @@ export function Footer() {
                   href={site.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center gap-2 transition-colors hover:text-ember"
+                  className="mt-1 inline-flex items-center gap-2 transition-colors hover:text-white"
                 >
                   <svg
                     width="18"
@@ -82,13 +78,11 @@ export function Footer() {
           </div>
         </div>
 
-        <hr className="ledger-rule my-9" />
+        <hr className="my-9 border-0 border-t border-pine" />
 
-        <div className="flex flex-col-reverse items-start justify-between gap-4 text-xs text-ink-faint sm:flex-row sm:items-center">
+        <div className="flex flex-col-reverse items-start justify-between gap-4 text-xs text-sand-light sm:flex-row sm:items-center">
           <p>© {year} HostAllies. All rights reserved.</p>
-          <p className="font-mono">
-            Built by property managers, for property managers.
-          </p>
+          <p>Built by property managers, for property managers.</p>
         </div>
       </div>
     </footer>

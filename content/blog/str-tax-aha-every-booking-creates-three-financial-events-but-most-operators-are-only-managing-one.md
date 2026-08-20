@@ -1,5 +1,6 @@
 ---
 title: "STR Tax Aha: Every Booking Creates Three Financial Events. But Most Operators Are Only Managing One."
+seoTitle: "Three Financial Events Per STR Booking"
 slug: str-tax-aha-every-booking-creates-three-financial-events-but-most-operators-are-only-managing-one
 date: 2026-04-22
 author: Team HostAllies

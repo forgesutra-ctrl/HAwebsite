@@ -9,8 +9,8 @@ export function TeamMemberCard({
   full?: boolean;
 }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-rule-strong bg-surface shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]">
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-2">
+    <article className="flex flex-col overflow-hidden rounded-card border border-moss bg-white transition-colors hover:border-orange-dark">
+      <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-moss bg-white">
         {member.image ? (
           <Image
             src={member.image}
@@ -23,34 +23,27 @@ export function TeamMemberCard({
           <Monogram initials={member.initials} />
         )}
       </div>
-      <div className="flex flex-1 flex-col border-t border-rule p-5">
-        <h3 className="font-display text-xl font-bold">{member.name}</h3>
-        <p className="mt-1 font-mono text-xs uppercase tracking-[0.1em] text-ember">
-          {member.role}
-        </p>
+      <div className="flex flex-1 flex-col border-t border-sand p-5">
+        <h3 className="font-heading text-h3 font-bold text-pine-dark">
+          {member.name}
+        </h3>
+        <p className="mt-1 text-label text-orange-dark">{member.role}</p>
         {full && (
-          <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-            {member.bio}
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-pine">{member.bio}</p>
         )}
       </div>
     </article>
   );
 }
 
-/** Ledger-card monogram treatment for members without a headshot yet. */
 function Monogram({ initials }: { initials: string }) {
   return (
-    <div className="absolute inset-0 grid place-items-center">
+    <div className="absolute inset-0 grid place-items-center bg-white">
       <div
-        className="absolute inset-0 opacity-[0.5]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(to bottom, transparent 0, transparent 27px, var(--rule) 27px, var(--rule) 28px)",
-        }}
+        className="absolute inset-0 opacity-50 ruled"
         aria-hidden="true"
       />
-      <span className="relative font-display text-5xl font-bold text-brand">
+      <span className="relative font-heading text-5xl font-bold text-orange-dark">
         {initials}
       </span>
     </div>

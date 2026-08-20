@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "validate:seo": "npx --yes tsx scripts/validate-seo.ts",
+    "validate:content": "npx --yes tsx scripts/warn-content-gaps.ts",
+    "test:a11y": "npx --yes tsx --test tests/contrast.test.ts",
+    "audit:contrast": "npx --yes tsx scripts/audit-contrast.ts",
+    "build": "npm run validate:seo && npm run validate:content && npm run test:a11y && next build",
     "start": "next start",
     "lint": "eslint"
   },

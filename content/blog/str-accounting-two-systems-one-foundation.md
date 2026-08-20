@@ -1,10 +1,11 @@
 ---
 title: "STR Accounting: Two Systems, One Foundation"
+seoTitle: "STR Trust vs Financial Accounting"
 slug: str-accounting-two-systems-one-foundation
 date: 2025-10-01
 author: Team HostAllies
 readTime: "3 min"
-excerpt: "STR accounting is really two systems—trust and financial—that must stay separate yet connected across revenue, expenses, and liabilities to prove true financial health."
+excerpt: "STR operators: trust and financial accounting must stay separate yet connected across revenue, expenses, and liabilities to prove financial health."
 heroImage: "/images/blog/two-systems-one-foundation.jpg"
 category: "Guides"
 relatedVideo: "https://youtu.be/yLYhl9pUjL8"

@@ -1,35 +1,74 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/lib/site";
+import { absoluteUrl, isProductionSite } from "@/lib/seo";
 import { getAllPosts } from "@/lib/blog";
+import {
+  serviceSlugs,
+  solutionSlugs,
+  processSlugs,
+  resourcesNav,
+} from "@/lib/navigation";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = site.url;
+  if (!isProductionSite()) {
+    return [];
+  }
+
+  const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${base}/about`, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/"), changeFrequency: "weekly", priority: 1, lastModified: now },
+    { url: absoluteUrl("/pricing"), changeFrequency: "monthly", priority: 0.8, lastModified: now },
+    { url: absoluteUrl("/consultation"), changeFrequency: "monthly", priority: 0.9, lastModified: now },
+    { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.8, lastModified: now },
     {
-      url: `${base}/services/financial-management`,
+      url: absoluteUrl("/trust-accounting-assessment"),
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.85,
+      lastModified: now,
     },
-    {
-      url: `${base}/services/revenue-management`,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    { url: `${base}/partnerships`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/resources`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/contact`, changeFrequency: "yearly", priority: 0.8 },
+    ...resourcesNav.items
+      .filter((item) => item.href !== "/partnerships")
+      .map((item) => ({
+        url: absoluteUrl(item.href),
+        changeFrequency: "monthly" as const,
+        priority: item.href.includes("/blog") ? 0.7 : 0.6,
+        lastModified: now,
+      })),
   ];
 
-  // Only public posts belong in the sitemap (the hidden post stays out).
+  const serviceRoutes = serviceSlugs.map((slug) => ({
+    url: absoluteUrl(`/services/${slug}`),
+    changeFrequency: "monthly" as const,
+    priority: slug === "trust-accounting" ? 0.95 : 0.8,
+    lastModified: now,
+  }));
+
+  const solutionRoutes = solutionSlugs.map((slug) => ({
+    url: absoluteUrl(`/solutions/${slug}`),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+    lastModified: now,
+  }));
+
+  const processRoutes = processSlugs.map((slug) => ({
+    url: absoluteUrl(`/process/${slug}`),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+    lastModified: now,
+  }));
+
   const postRoutes: MetadataRoute.Sitemap = getAllPosts(false).map((p) => ({
-    url: `${base}/resources/${p.slug}`,
+    url: absoluteUrl(`/resources/${p.slug}`),
     lastModified: p.date,
     changeFrequency: "yearly",
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...postRoutes];
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...solutionRoutes,
+    ...processRoutes,
+    ...postRoutes,
+  ];
 }

@@ -1,15 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Pin the workspace root (multiple lockfiles exist above this folder).
   turbopack: {
     root: import.meta.dirname,
   },
   async redirects() {
-    // statusCode 301 (rather than Next's default 308) to match the migration brief.
     return [
-      // Renamed pages from the old Wix site — preserve indexed equity.
-      { source: "/about-us", destination: "/about", statusCode: 301 },
+      { source: "/about-us", destination: "/process/about-hostallies", statusCode: 301 },
+      { source: "/about", destination: "/process/about-hostallies", statusCode: 301 },
       {
         source: "/financial-management",
         destination: "/services/financial-management",
@@ -17,16 +15,21 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/revenuemanagement",
-        destination: "/services/revenue-management",
+        destination: "/services/financial-management",
         statusCode: 301,
       },
       {
         source: "/revenue-management",
-        destination: "/services/revenue-management",
+        destination: "/services/financial-management",
+        statusCode: 301,
+      },
+      {
+        source: "/services/revenue-management",
+        destination: "/services/financial-management",
         statusCode: 301,
       },
       { source: "/contact-us", destination: "/contact", statusCode: 301 },
-      // Blog posts kept their slugs; only the path segment changed.
+      { source: "/resources", destination: "/resources/blog", statusCode: 301 },
       {
         source: "/post/:slug",
         destination: "/resources/:slug",

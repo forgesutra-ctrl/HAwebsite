@@ -1,10 +1,11 @@
 ---
 title: "STR Profitability Ratios That Reveal Your Real Margin"
+seoTitle: "STR Profitability Ratios Guide"
 slug: str-profitability-ratios-that-reveal-your-real-margin
 date: 2026-06-10
 author: Team HostAllies
 readTime: "3 min"
-excerpt: "Four financial ratios—Revenue per Property, Fees-to-Rent, Cleaning Margin, and Operator NOI Margin—reveal where your STR operation actually creates or loses profit."
+excerpt: "Property managers: four ratios—Revenue per Property, Fees-to-Rent, Cleaning Margin, and NOI Margin—reveal where your STR operation creates or loses profit."
 heroImage: "/images/blog/profitability-ratios-og.png"
 category: "Profitability"
 hidden: false

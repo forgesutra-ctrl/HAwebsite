@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { Eyebrow } from "@/components/ui/Section";
+import { AccentPanel, Eyebrow } from "@/components/ui/Section";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { site, fullAddress } from "@/lib/site";
+import { staticPageSeo } from "@/lib/seo/pages";
 
-export const metadata: Metadata = {
-  title: "Book a Free Consultation",
-  description:
-    "Tell us about your STR portfolio and goals. Book a free consultation with HostAllies — trust accounting, owner statements, reconciliation, tax, and revenue management, handled.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Book a Free Consultation | HostAllies",
-    description:
-      "Tell us about your portfolio and goals. We'll show you exactly how we'd take the back office off your plate.",
-    url: "/contact",
-  },
-};
+export const metadata: Metadata = staticPageSeo.contact;
 
 function ContactDetail({
   label,
@@ -25,11 +15,9 @@ function ContactDetail({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-t border-rule py-4">
-      <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-faint">
-        {label}
-      </dt>
-      <dd className="mt-1.5 text-[15px] text-ink">{children}</dd>
+    <div className="border-t border-sand py-4">
+      <dt className="text-label text-moss-dark">{label}</dt>
+      <dd className="mt-1.5 text-body text-pine-dark">{children}</dd>
     </div>
   );
 }
@@ -44,16 +32,14 @@ export default function ContactPage() {
         ]}
       />
 
-      <section className="border-b border-rule">
+      <section className="border-b border-moss bg-white">
         <div className="container py-14 sm:py-16">
-          <div className="max-w-3xl">
+          <div className="max-w-prose">
             <Eyebrow>Get started</Eyebrow>
-            <h1 className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
-              Let's take the back office off your plate.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink-soft sm:text-xl">
-              Tell us about your portfolio and goals. We'll follow up to book a
-              free consultation and show you exactly how we'd handle your books.
+            <h1 className="mt-6">Let&apos;s take the back office off your plate.</h1>
+            <p className="mt-6 text-body text-pine lg:text-h3">
+              Tell us about your portfolio and goals. We&apos;ll follow up to book a
+              free consultation and show you exactly how we&apos;d handle your books.
             </p>
           </div>
         </div>
@@ -61,30 +47,25 @@ export default function ContactPage() {
 
       <div className="container py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.85fr] lg:gap-16">
-          {/* Form */}
-          <div className="rounded-3xl border border-rule bg-surface-2 p-6 sm:p-9">
-            <ContactForm />
-          </div>
+          <AccentPanel className="p-6 sm:p-9">
+            <ContactForm formPurpose="contact" />
+          </AccentPanel>
 
-          {/* Sidebar */}
           <aside className="lg:pt-2">
-            <h2 className="font-serif text-2xl">Prefer to reach us directly?</h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
-              We're happy to talk it through. However you get in touch, you'll
+            <h2 className="font-heading text-h2">Prefer to reach us directly?</h2>
+            <p className="mt-3 text-body text-pine">
+              We&apos;re happy to talk it through. However you get in touch, you&apos;ll
               hear back within one business day.
             </p>
 
             <dl className="mt-6">
               <ContactDetail label="Phone">
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="hover:text-ember"
-                >
+                <a href={`tel:${site.phoneHref}`} className="hover:text-orange-dark">
                   {site.phone}
                 </a>
               </ContactDetail>
               <ContactDetail label="Email">
-                <a href={`mailto:${site.email}`} className="hover:text-ember">
+                <a href={`mailto:${site.email}`} className="hover:text-orange-dark">
                   {site.email}
                 </a>
               </ContactDetail>
@@ -94,7 +75,7 @@ export default function ContactPage() {
                   href={site.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 hover:text-ember"
+                  className="inline-flex items-center gap-2 hover:text-orange-dark"
                 >
                   <svg
                     width="18"
@@ -110,13 +91,10 @@ export default function ContactPage() {
               </ContactDetail>
             </dl>
 
-            {/* Scheduling embed slot — drop a Calendly/HubSpot embed here when chosen. */}
-            <div className="mt-8 rounded-2xl border border-dashed border-rule-strong bg-surface p-5">
-              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-faint">
-                Scheduling
-              </p>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-                Fill out the form and we'll send you a link to grab a time — or
+            <div className="mt-8 rounded-card border border-dashed border-moss bg-white p-5">
+              <p className="text-label text-moss-dark">Scheduling</p>
+              <p className="mt-2 text-body text-pine">
+                Fill out the form and we&apos;ll send you a link to grab a time — or
                 we can embed a live scheduler here once you choose one.
               </p>
             </div>

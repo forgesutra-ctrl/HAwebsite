@@ -1,5 +1,6 @@
 ---
 title: "Is Your Lodging Tax Sitting in the Wrong Account Right Now?"
+seoTitle: "Is Your Lodging Tax in the Wrong Account?"
 slug: is-your-lodging-tax-is-sitting-in-the-wrong-account-right-now
 date: 2026-04-28
 author: Team HostAllies

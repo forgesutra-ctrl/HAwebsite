@@ -1,10 +1,11 @@
 ---
 title: "5 Complex STR Accounting Questions, Answered (Simply)"
+seoTitle: "5 STR Accounting Questions Answered"
 slug: 5-complex-str-accounting-questions-answered-simply
 date: 2025-10-31
 author: Team HostAllies
 readTime: "4 min"
-excerpt: "A practical walkthrough of five common STR accounting challenges—from trust versus financial accounting to expense control—and how an integrated playbook solves them."
+excerpt: "Property managers: five common STR accounting challenges—from trust vs financial accounting to expense control—and how an integrated playbook solves them."
 heroImage: "/images/blog/five-questions-og.png"
 category: "Guides"
 hidden: false

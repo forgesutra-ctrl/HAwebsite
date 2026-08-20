@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { trackConversion, type ConversionEvent } from "@/lib/analytics";
 
 const interests = [
   "Financial Management",
-  "Revenue Management",
+  "Trust Accounting",
+  "Tax Preparation",
   "Both",
   "Partnership inquiry",
   "Something else",
@@ -14,9 +16,8 @@ const interests = [
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldBase =
-  "w-full rounded-xl border border-rule bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint transition-colors focus:border-brand focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand";
-const labelBase =
-  "mb-1.5 block font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft";
+  "w-full rounded-control border border-sand bg-white px-4 py-3 text-body text-pine-dark placeholder:text-moss-dark transition-colors focus:border-orange-dark focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-orange-dark";
+const labelBase = "mb-1.5 block text-label text-pine";
 
 function Label({
   htmlFor,
@@ -30,14 +31,22 @@ function Label({
   return (
     <label htmlFor={htmlFor} className={labelBase}>
       {children}
-      {required && <span className="text-ember"> *</span>}
+      {required && <span className="text-orange-dark"> *</span>}
     </label>
   );
 }
 
-export function ContactForm() {
+export function ContactForm({
+  formPurpose = "contact",
+}: {
+  formPurpose?: "contact" | "consultation";
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const conversionEvent: ConversionEvent =
+    formPurpose === "consultation"
+      ? "form_consultation_submit"
+      : "form_contact_submit";
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -46,7 +55,11 @@ export function ContactForm() {
 
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
+    const payload = {
+      ...Object.fromEntries(fd.entries()),
+      source:
+        formPurpose === "consultation" ? "consultation_form" : "contact_form",
+    };
 
     try {
       const res = await fetch("/api/contact", {
@@ -61,6 +74,7 @@ export function ContactForm() {
         return;
       }
       setStatus("success");
+      trackConversion(conversionEvent);
       form.reset();
     } catch {
       setStatus("error");
@@ -70,8 +84,8 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-ledger/30 bg-ledger-soft p-8 text-center">
-        <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-ledger text-white">
+      <div className="rounded-card border border-moss bg-white p-8 text-center">
+        <div className="mx-auto grid h-12 w-12 place-items-center rounded-control bg-pine-dark text-white">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M5 12.5l4.5 4.5L19 7"
@@ -82,11 +96,11 @@ export function ContactForm() {
             />
           </svg>
         </div>
-        <h3 className="mt-4 font-serif text-2xl text-ink">Thanks — we've got it.</h3>
-        <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-ink-soft">
+        <h2 className="mt-4 font-heading text-h2 text-pine-dark">Thanks — we&apos;ve got it.</h2>
+        <p className="mx-auto mt-2 max-w-prose text-body text-pine">
           One of our Allies will be in touch shortly to book your free
           consultation. Prefer to talk now? Call us at{" "}
-          <a href="tel:+14047351666" className="text-ember hover:underline">
+          <a href="tel:+14047351666" className="text-orange-dark hover:underline">
             404-735-1666
           </a>
           .
@@ -94,7 +108,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 font-mono text-xs text-ink-soft underline hover:text-ember"
+          className="mt-6 text-xs text-pine underline hover:text-orange-dark"
         >
           Send another message
         </button>
@@ -104,7 +118,6 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5">
-      {/* Honeypot — visually hidden, must stay empty */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label htmlFor="company_url">Company URL</label>
         <input
@@ -229,7 +242,7 @@ export function ContactForm() {
       {status === "error" && error && (
         <p
           role="alert"
-          className="rounded-xl border border-ember/30 bg-brand-tint px-4 py-3 text-sm text-ember"
+          className="rounded-control border border-orange-dark bg-white px-4 py-3 text-sm text-orange-dark"
         >
           {error}
         </p>
@@ -239,7 +252,7 @@ export function ContactForm() {
         <Button type="submit" size="lg" disabled={status === "submitting"} arrow>
           {status === "submitting" ? "Sending…" : "Book my free consultation"}
         </Button>
-        <p className="text-xs text-ink-faint">
+        <p className="text-xs text-moss-dark">
           No spam. We reply within one business day.
         </p>
       </div>

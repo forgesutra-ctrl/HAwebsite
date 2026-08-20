@@ -1,5 +1,6 @@
 ---
 title: "Unlock Hidden Profits: The Must-Know STR Financial Playbook"
+seoTitle: "STR Financial Playbook for Operators"
 slug: unlock-hidden-profits-the-must-know-str-financial-playbook
 date: 2025-10-29
 author: Team HostAllies
